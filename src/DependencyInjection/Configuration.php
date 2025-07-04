@@ -40,11 +40,6 @@ final class Configuration implements ConfigurationInterface
                     ->info('Route name for the jwks endpoint')
                     ->defaultValue('oidc_jwks')
                 ->end()
-                ->arrayNode('response_types_supported')
-                    ->info('List of the OAuth 2.0 response_type values that this OP supports.')
-                    ->scalarPrototype()->end()
-                    ->defaultValue(['code', 'id_token', 'id_token token'])
-                ->end()
             ->end()
         ;
 

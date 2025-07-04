@@ -26,14 +26,10 @@ final class AjgarlagOidcProviderExtension extends Extension
      */
     private function configureDiscovery(ContainerBuilder $container, array $config): void
     {
-        // foreach ($config as $key => $value) {
-        //     $container->setParameter('ajgarlag.oidc_provider.discovery.'.$key, $value);
-        // }
         $container->getDefinition('ajgarlag.oidc_provider.controller.discovery')
-            ->replaceArgument(1, $config['authorization_endpoint_route'])
-            ->replaceArgument(2, $config['token_endpoint_route'])
-            ->replaceArgument(3, $config['jwks_endpoint_route'])
-            ->replaceArgument(4, $config['response_types_supported'])
+            ->replaceArgument(2, $config['authorization_endpoint_route'])
+            ->replaceArgument(3, $config['token_endpoint_route'])
+            ->replaceArgument(4, $config['jwks_endpoint_route'])
         ;
     }
 }

@@ -25,7 +25,7 @@ AjgarlagOidcProviderBundle is a Symfony bundle that integrates an OpenID Connect
         type: php
     ```
 
-3. Tweak the discovery configuration in your `config/packages/ajgarlag_oidc_provider.yaml` if needed. These are the default values:
+4. Tweak the discovery configuration in your `config/packages/ajgarlag_oidc_provider.yaml` if needed. These are the default values:
 
     ```yaml
     ajgarlag_oidc_provider:
@@ -33,7 +33,6 @@ AjgarlagOidcProviderBundle is a Symfony bundle that integrates an OpenID Connect
             authorization_endpoint_route: 'oauth2_authorize'
             token_endpoint_route: 'oauth2_token'
             jwks_endpoint_route: 'oidc_jwks'
-            response_types_supported: ['code', 'id_token', 'id_token token']
     ```
 
 ## Documentation

@@ -44,6 +44,7 @@ return static function (ContainerConfigurator $container): void {
 
         ->set('ajgarlag.oidc_provider.controller.discovery', DiscoveryController::class)
             ->args([
+                service('league.oauth2_server.authorization_server'),
                 service(UrlGeneratorInterface::class),
                 null,
                 null,
