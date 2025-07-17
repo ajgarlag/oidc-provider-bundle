@@ -33,6 +33,9 @@ final class SaveRelyingPartyCommand extends Command
             ->addOption('add-post-logout-redirect-uri', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Add allowed post logout redirect uri to the client.', [])
             ->addOption('remove-post-logout-redirect-uri', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Remove allowed post logout redirect uri to the client.', [])
 
+            ->addOption('set-front-channel-logout-uri', null, InputOption::VALUE_OPTIONAL, 'Set front channel logout uri.', null)
+            ->addOption('unset-front-channel-logout-uri', null, InputOption::VALUE_NONE, 'Unset front channel logout uri.')
+
             ->addArgument('identifier', InputArgument::REQUIRED, 'The client identifier')
         ;
     }
@@ -47,9 +50,18 @@ final class SaveRelyingPartyCommand extends Command
             return 1;
         }
 
+        if ($input->getOption('set-front-channel-logout-uri') && $input->getOption('unset-front-channel-logout-uri')) {
+            $io->error('Cannot specify "--set-front-channel-logout-uri" and "--unset-front-channel-logout-uri" at the same time.');
+
+            return 2;
+        }
+
         $relyingParty = $this->relyingPartyManager->get($client);
 
         $relyingParty->setPostLogoutRedirectUris(...$this->getClientRelatedModelsFromInput($input, RedirectUri::class, $relyingParty->getPostLogoutRedirectUris(), 'post-logout-redirect-uri'));
+        if ($input->getOption('unset-front-channel-logout-uri') || $frontChannelLogoutUri = $input->getOption('set-front-channel-logout-uri')) {
+            $relyingParty->setFrontChannelLogoutUri($frontChannelLogoutUri ?? null);
+        }
 
         $this->relyingPartyManager->save($relyingParty);
 

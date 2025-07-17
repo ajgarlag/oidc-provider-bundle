@@ -53,8 +53,8 @@ final class ShowRelyingPartyCommand extends Command
 
     private function drawTable(OutputStyle $io, RelyingPartyInterface $relyingParty): void
     {
-        $columns = ['name', 'identifier', 'post logout redirect uri'];
-        $rows = [array_combine($columns, [$relyingParty->getClient()->getName(), $relyingParty->getClient()->getIdentifier(), implode(', ', $relyingParty->getPostLogoutRedirectUris())])];
+        $columns = ['name', 'identifier', 'post logout redirect uri', 'front channel logout uri'];
+        $rows = [array_combine($columns, [$relyingParty->getClient()->getName(), $relyingParty->getClient()->getIdentifier(), implode(', ', $relyingParty->getPostLogoutRedirectUris()), $relyingParty->getFrontChannelLogoutUri() ?? ''])];
         $io->table($columns, $rows);
     }
 }

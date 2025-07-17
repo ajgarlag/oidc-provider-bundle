@@ -22,4 +22,14 @@ interface RelyingPartyInterface
     public function getPostLogoutRedirectUris(): array;
 
     public function setPostLogoutRedirectUris(RedirectUri ...$postLogoutRedirectUris): self;
+
+    /**
+     * @return non-empty-string|null
+     */
+    public function getFrontChannelLogoutUri(): ?string;
+
+    /**
+     * @param non-empty-string|null $frontChannelLogoutUri
+     */
+    public function setFrontChannelLogoutUri(?string $frontChannelLogoutUri): self;
 }
