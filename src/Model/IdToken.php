@@ -69,7 +69,7 @@ final class IdToken implements IdTokenInterface
     {
         $authorizedParty = $this->token->claims()->get('azp');
 
-        return \is_string($authorizedParty) ? $authorizedParty : null;
+        return \is_string($authorizedParty) && '' !== $authorizedParty ? $authorizedParty : null;
     }
 
     public function getClaim(string $name, mixed $default = null): mixed

@@ -27,6 +27,9 @@ interface IdTokenInterface extends \Stringable
 
     public function getAuthenticatedAtTime(): ?\DateTimeImmutable;
 
+    /**
+     * @return non-empty-string|null
+     */
     public function getAuthorizedParty(): ?string;
 
     /**
